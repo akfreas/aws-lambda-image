@@ -133,7 +133,7 @@ class ImageProcessor {
 
             resolve(
                 new ImageData(
-                    image.combineWithDirectory(option.directory),
+                    image.combineWithDirectoryAndSuffix(option.directory, option.suffix),
                     option.bucket || image.bucketName,
                     image.data,
                     image.headers,

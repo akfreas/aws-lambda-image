@@ -104,23 +104,30 @@ class ImageData {
     }
 
     /**
-     * Combines dirName, filename, and directory (from options).
+     * Combines dirName, filename, directory, and suffix (from options).
      *
      * @public
      * @param String directory (from options)
+     * @param String suffix (from options)
      * @return String
      */
-    combineWithDirectory(directory) {
+    combineWithDirectoryAndSuffix(directory, suffix) {
+        var joinedPath;
         if ( directory != null ) {
             // ./X , ../X , . , ..
             if ( directory.match(/^\.\.?\//) || directory.match(/^\.\.?$/) ) {
-                return path.join(this.dirName, directory, this.baseName);
+                joinedPath = path.join(this.dirName, directory, this.baseName);
             } else {
-                return path.join(directory, this.baseName);
+                joinedPath = path.join(directory, this.baseName);
             }
         } else {
-            return path.join(this.dirName, this.baseName);
+            joinedPath = path.join(this.dirName, this.baseName);
         }
+        if ( suffix != null ) {
+            joinedPath = joinedPath + suffix
+        }
+
+        return joinedPath
     }
 }
 
